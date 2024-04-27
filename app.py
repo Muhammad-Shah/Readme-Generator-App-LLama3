@@ -13,3 +13,8 @@ if uploaded_file is not None:
     st.markdown("""-----------------------------""")
     st.subheader('Preview')
     st.markdown(response)
+
+    # Add a button to copy the response
+    if st.button('Copy Response'):
+        st.text_area('Copied Response', value=response)
+        st.info('Response copied to clipboard!')
