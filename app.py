@@ -17,9 +17,5 @@ if uploaded_file is not None:
 
     # Add a button to copy the response
     if st.button('Copy Response'):
-<<<<<<< HEAD
         pyperclip.copy(response)
-=======
-        st.text_area('Copied Response', value=response)
->>>>>>> 472176a144531ced8e81847060882fa5bdb5ad2f
         st.info('Response copied to clipboard!')
