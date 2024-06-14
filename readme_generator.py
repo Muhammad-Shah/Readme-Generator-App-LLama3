@@ -1,5 +1,10 @@
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
+
+dotenv_path = '.env'
+load_dotenv(dotenv_path)
+GROQ_API = os.getenv('GROQ_API')
+
 chat = ChatGroq(temperature=0.5,
                 model_name="Llama3-70b-8192",
                 api_key=GROQ_API,
@@ -7,13 +12,15 @@ chat = ChatGroq(temperature=0.5,
                 model_kwargs={
                     "top_p": 1,
                     "frequency_penalty": 0.0,
-                    "presence_penalty" : 0.0
+                    "presence_penalty": 0.0
                 }
                 )
+
 def ask(text):
-    system = "You help developers creationg readme file from code as an Assistant don't include irrelevant words just give me readme text so that I can copy pate"
-    human = '{query} \n\n `Read the code and generate README.md file?`'
-    prompt = ChatPromptTemplate.from_messages(messages=[('system', system), ('human', human)])
+    system = "You create mardown from the code As an assistant."
+    human = '{query} \n\n `Read the code and generate README.md file?` Avoid writing "Here is a generated README.md file based on the provided code:" It make it obvious that AI wrote the READ.md file'
+    prompt = ChatPromptTemplate.from_messages(
+        messages=[('system', system), ('human', human)])
     chain = prompt | chat
     response = chain.invoke({"query": f'{text}'}).content
     return response
