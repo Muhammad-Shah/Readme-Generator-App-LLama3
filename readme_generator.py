@@ -1,5 +1,7 @@
+import os
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
+from dotenv import find_dotenv, load_dotenv
 
 dotenv_path = '.env'
 load_dotenv(dotenv_path)
@@ -15,6 +17,7 @@ chat = ChatGroq(temperature=0.5,
                     "presence_penalty": 0.0
                 }
                 )
+
 
 def ask(text):
     system = "You create mardown from the code As an assistant."
